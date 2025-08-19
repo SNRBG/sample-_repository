@@ -94,4 +94,54 @@ if (file_exists($file)) {
             margin-top: 20px; 
         }
         table, th, td { 
-            border
+            border: 1px solid #ccc; 
+        }
+        th, td { 
+            padding: 10px; 
+            text-align: left; 
+        }
+        .msg { 
+            padding: 10px; 
+            background: #e0f7fa; 
+            border-left: 5px solid #00bcd4; 
+            margin-bottom: 15px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Student Record Management</h2>
+
+        <?php if ($message): ?>
+            <div class="msg"><?= $message ?></div>
+        <?php endif; ?>
+
+        <form method="post">
+            <input type="text" name="name" placeholder="Enter Student Name" required>
+            <input type="text" name="roll" placeholder="Enter Roll Number" required>
+            <input type="number" name="marks" placeholder="Enter Marks" required>
+            <input type="submit" name="submit" value="Add Record">
+            <input type="submit" name="reset" value="Delete All Records" style="background: red;">
+        </form>
+
+        <?php if (count($records) > 0): ?>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Roll No</th>
+                    <th>Marks</th>
+                </tr>
+                <?php foreach ($records as $r): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($r["name"]) ?></td>
+                        <td><?= htmlspecialchars($r["roll"]) ?></td>
+                        <td><?= htmlspecialchars($r["marks"]) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        <?php else: ?>
+            <p>No records found.</p>
+        <?php endif; ?>
+    </div>
+</body>
+</html>
